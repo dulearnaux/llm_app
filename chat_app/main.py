@@ -30,17 +30,21 @@ if __name__ == '__main__':
         chunk_size=250, chunk_overlap=0)
 
     doc_chunks = text_splitter.split_documents(docs_flat)
+    # base_url = st.text_input('base_url', 'http://127.0.0.0:11434')
+    base_url = 'http://127.0.0.0:11434'
 
     embeddings = {
         'openai': OpenAIEmbeddings(openai_api_key=os.environ["OPENAI_API_KEY"]),
-        'llama3.1': OllamaEmbeddings(model="llama3.1:8b"),
-        'llama3.2': OllamaEmbeddings(model="llama3.2:1b")
+        'llama3.1:8b': OllamaEmbeddings(model="llama3.1:8b"),
+        'llama3.2:1b': OllamaEmbeddings(model="llama3.2:1b")
     }
 
-    emb = st.sidebar.radio("Choose your embedding.", ["openai", "llama3.1", "llama3.2"], index=0,
-             captions=['uses online api (text-embedding-ada-002), loads the quickest, but costs $$$',
-                       'local 8b, works with RAG, but slow initial load',
-                       'local 1b, doesnt use RAG but loads quicker'])
+    emb = st.sidebar.radio(
+        "Choose your embedding.",
+        ["openai", "llama3.1:8b", "llama3.2:1b"], index=0,
+        captions=['uses online api (text-embedding-ada-002), loads the quickest, but costs $$$',
+                  'local 8b, works with RAG, but slow initial load',
+                  'local 1b, doesnt use RAG but loads quicker'])
 
     # create embeddings for the docs. One set of embeddings for each chunk.
     vectorstore = SKLearnVectorStore.from_documents(
@@ -62,8 +66,14 @@ if __name__ == '__main__':
             """,
         input_variables=["question", "documents"]
     )
+    model = st.sidebar.radio(
+        "Choose your language model.",
+        ["llama3.1:8b", "llama3.2:1b"], index=1,
+        captions=['local 8b, works with RAG, but slow initial load',
+                  'local 1b, doesnt use RAG but loads quicker'])
+    llm = ChatOllama(
+        model=model, temperature=0, stop=["<|eot_id|>"], base_url=base_url)
 
-    llm = ChatOllama(model="llama3.1", temperature=0, stop=["<|eot_id|>"])
     rag_chain = prompt | llm | StrOutputParser()
 
     class RAGApp:
@@ -76,7 +86,6 @@ if __name__ == '__main__':
             doc_texts = "\\n".join([doc.page_content for doc in documents])
             answer = self.rag_chain.invoke({"question": question, "documents": doc_texts})
             return answer
-
 
     st.header('LLM RAG Demo')
     st.write('Demo of an LLM RAG using Ollama and Llama models.\n')

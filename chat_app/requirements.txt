@@ -20,6 +20,8 @@ anyio==4.7.0
     # via
     #   httpx
     #   openai
+asttokens==3.0.0
+    # via stack-data
 async-timeout==4.0.3
     # via
     #   aiohttp
@@ -29,6 +31,8 @@ attrs==24.2.0
     #   aiohttp
     #   jsonschema
     #   referencing
+backcall==0.2.0
+    # via ipython
 beautifulsoup4==4.12.3
     # via -r requirements.in
 blinker==1.9.0
@@ -46,10 +50,14 @@ click==8.1.8
     # via streamlit
 dataclasses-json==0.6.7
     # via langchain-community
+decorator==5.1.1
+    # via ipython
 distro==1.9.0
     # via openai
 exceptiongroup==1.2.2
     # via anyio
+executing==2.1.0
+    # via stack-data
 frozenlist==1.5.0
     # via
     #   aiohttp
@@ -77,6 +85,10 @@ idna==3.10
     #   httpx
     #   requests
     #   yarl
+ipython==8.12.3
+    # via -r requirements.in
+jedi==0.19.2
+    # via ipython
 jinja2==3.1.5
     # via
     #   altair
@@ -93,13 +105,13 @@ jsonschema==4.23.0
     # via altair
 jsonschema-specifications==2024.10.1
     # via jsonschema
-langchain==0.3.13
+langchain==0.3.14
     # via
     #   -r requirements.in
     #   langchain-community
-langchain-community==0.3.13
+langchain-community==0.3.14
     # via -r requirements.in
-langchain-core==0.3.28
+langchain-core==0.3.29
     # via
     #   -r requirements.in
     #   langchain
@@ -109,7 +121,7 @@ langchain-core==0.3.28
     #   langchain-text-splitters
 langchain-ollama==0.2.2
     # via -r requirements.in
-langchain-openai==0.2.14
+langchain-openai==0.3.0
     # via -r requirements.in
 langchain-text-splitters==0.3.3
     # via langchain
@@ -124,6 +136,8 @@ markupsafe==3.0.2
     # via jinja2
 marshmallow==3.23.1
     # via dataclasses-json
+matplotlib-inline==0.1.7
+    # via ipython
 mdurl==0.1.2
     # via markdown-it-py
 multidict==6.1.0
@@ -157,14 +171,26 @@ packaging==24.2
     #   streamlit
 pandas==2.2.3
     # via streamlit
+parso==0.8.4
+    # via jedi
+pexpect==4.9.0
+    # via ipython
+pickleshare==0.7.5
+    # via ipython
 pillow==11.0.0
     # via streamlit
+prompt-toolkit==3.0.48
+    # via ipython
 propcache==0.2.1
     # via
     #   aiohttp
     #   yarl
 protobuf==5.29.2
     # via streamlit
+ptyprocess==0.7.0
+    # via pexpect
+pure-eval==0.2.3
+    # via stack-data
 pyarrow==18.1.0
     # via streamlit
 pydantic==2.10.3
@@ -182,7 +208,9 @@ pydantic-settings==2.7.0
 pydeck==0.9.1
     # via streamlit
 pygments==2.18.0
-    # via rich
+    # via
+    #   ipython
+    #   rich
 python-dateutil==2.9.0.post0
     # via pandas
 python-dotenv==1.0.1
@@ -216,7 +244,7 @@ rpds-py==0.22.3
     # via
     #   jsonschema
     #   referencing
-scikit-learn==1.6.0
+scikit-learn==1.6.1
     # via -r requirements.in
 scipy==1.14.1
     # via scikit-learn
@@ -235,6 +263,8 @@ sqlalchemy==2.0.36
     # via
     #   langchain
     #   langchain-community
+stack-data==0.6.3
+    # via ipython
 streamlit==1.41.1
     # via -r requirements.in
 tenacity==9.0.0
@@ -253,6 +283,10 @@ tornado==6.4.2
     # via streamlit
 tqdm==4.67.1
     # via openai
+traitlets==5.14.3
+    # via
+    #   ipython
+    #   matplotlib-inline
 typing-extensions==4.12.2
     # via
     #   altair
@@ -274,5 +308,7 @@ urllib3==2.2.3
     # via requests
 watchdog==6.0.0
     # via streamlit
+wcwidth==0.2.13
+    # via prompt-toolkit
 yarl==1.18.3
     # via aiohttp

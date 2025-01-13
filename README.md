@@ -14,7 +14,7 @@ Use Ollama to run our LLMs.
 
 # Install python dependencies
 
-`pip install ipython scikit-learn langchain langchain_community langchain-openai langchain-ollama streamlit`
+`pip install ipython scikit-learn langchain langchain_community langchain-openai langchain-ollama streamlit BeautifulSoup`
 
 # Run app
 

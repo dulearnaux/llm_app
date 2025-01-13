@@ -1,3 +1,4 @@
 .idea/
 chat_app/requirements.in
-chat_app/venv/
+chat_app/.venv/
+.env
