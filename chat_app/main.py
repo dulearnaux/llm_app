@@ -6,11 +6,9 @@ from langchain_community.vectorstores import SKLearnVectorStore
 from langchain_openai import OpenAIEmbeddings
 from langchain_ollama import OllamaEmbeddings
 
-
 from langchain_ollama import ChatOllama
 from langchain.prompts import PromptTemplate
 from langchain_core.output_parsers import StrOutputParser
-
 
 import streamlit as st
 
@@ -42,7 +40,8 @@ if __name__ == '__main__':
     emb = st.sidebar.radio(
         "Choose your embedding.",
         ["openai", "llama3.1:8b", "llama3.2:1b"], index=0,
-        captions=['uses online api (text-embedding-ada-002), loads the quickest, but costs $$$',
+        captions=['uses online api (text-embedding-ada-002), loads the quickest'
+                  ', but costs $$$',
                   'local 8b, works with RAG, but slow initial load',
                   'local 1b, doesnt use RAG but loads quicker'])
 
@@ -84,7 +83,8 @@ if __name__ == '__main__':
         def run(self, question):
             documents = self.retriever.invoke(question)
             doc_texts = "\\n".join([doc.page_content for doc in documents])
-            answer = self.rag_chain.invoke({"question": question, "documents": doc_texts})
+            answer = self.rag_chain.invoke(
+                {"question": question, "documents": doc_texts})
             return answer
 
     st.header('LLM RAG Demo')
@@ -97,4 +97,3 @@ if __name__ == '__main__':
     q = st.text_area('Write your query here', 'what is prompt engineering?')
     a = rag_app.run(q)
     st.write(a)
-
